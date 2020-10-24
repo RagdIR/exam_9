@@ -9,10 +9,10 @@
                 <h3><a href="{% url "webapp:photo_view" photo.pk %}">{{ photo.sign }}</a></h3>
                 <p>Добавил пользователь: <a href="{% url 'accounts:detail' photo.author.pk %}"> {{ photo.author }} </a></p>
                 <p>Добавлено: {{ photo.created_at|date:"d.m.Y H:i:s" }}</p></p>
-                {% if perms.webapp.update_photo or photo.user == request.user %}
+                {% if perms.webapp.update_photo or photo.author == request.user %}
                     <p><a href="{% url 'webapp:photo_update' photo.pk %}">Update</a></p>
                 {% endif %}
-                {% if perms.webapp.delete_photo or photo.user == request.user %}
+                {% if perms.webapp.delete_photo or photo.author == request.user %}
                     <p><a href="{% url 'webapp:photo_delete' photo.pk %}">Delete</a></p>
                 {% endif %}
             </div>

@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -46,25 +46,29 @@ class PhotoCreateView(CreateView):
     #     return reverse('photo_view', kwargs={'pk': self.object.pk})
 
 
-class PhotoUpdateView(UpdateView, UserPassesTestMixin):
+class PhotoUpdateView(UpdateView, PermissionRequiredMixin):
     template_name = 'photo/photo_update.html'
     form_class = PhotoForm
     model = Photo
+    permission_required = 'webapp.photo_update'
 
-    def test_func(self):
-        return self.request.user.has_perm or self.request.user('webapp.update_photo')
+    def has_permission(self):
+        photo = self.get_object()
+        return super().has_permission() or photo.author == self.request.user
 
     def get_success_url(self):
-        return reverse('photo_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:photo_view', kwargs={'pk': self.object.pk})
 
 
-class PhotoDeleteView(DeleteView, UserPassesTestMixin):
+class PhotoDeleteView(DeleteView, PermissionRequiredMixin):
     template_name = 'photo/photo_delete.html'
     model = Photo
+    permission_required = 'webapp.photo_delete'
     # success_url = reverse_lazy('index')
 
-    def test_func(self):
-        return self.request.user or self.request.user.has_perm('webapp.update_photo')
+    def has_permission(self):
+        photo = self.get_object()
+        return super().has_permission() or photo.author == self.request.user
 
     def get_success_url(self):
         return reverse('webapp:index')
