@@ -36,6 +36,15 @@
   }
 },
 {
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "birth_date": null,
+    "avatar": "user_pics/145603.700xp_lLzIUV7.jpg"
+  }
+},
+{
   "model": "webapp.photo",
   "pk": 1,
   "fields": {
