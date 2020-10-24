@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}View{% endblock %}
+{% block title %}Просмотр фото{% endblock %}
 
-{#{% block menu %}#}
-{#    <li><a href="{% url 'webapp:photo_update' photo.pk %}">Update</a></li>#}
-{#    <li><a href="{% url 'webapp:photo_delete' photo.pk %}">Delete</a></li>#}
-{#{% endblock %}#}
+{% block menu %}
+    <li><a href="{% url 'webapp:photo_update' photo.pk %}">Обновить</a></li>
+    <li><a href="{% url 'webapp:photo_delete' photo.pk %}">Удалить</a></li>
+{% endblock %}
 
 {% block content %}
-    <div class="box">
-        <img class="photo" src="{{ photo.photo }}" width="550" height="550" alt="photo">
-        <h1>{{ photo.sign }}</h1>
-        <p>Автор: {{ photo.author }}</p>
-        <p>Добавлено: {{ photo.created_at }}</p>
-    </div>
+    <form method="post" enctype="multipart/form-data">
+        <div class="box">
+            <img class="photo" src="{{ photo.photo }}" width="550" height="550" alt="photo">
+            <h1>{{ photo.sign }}</h1>
+            <p>Автор: {{ photo.author }}</p>
+            <p>Добавлено: {{ photo.created_at }}</p>
+        </div>
+    </form>
 {% endblock %}

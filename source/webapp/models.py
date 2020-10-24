@@ -5,7 +5,7 @@ class Photo(models.Model):
     photo = models.ImageField(null=False, blank=False, upload_to='user_pics', verbose_name='Фото')
     sign = models.CharField(max_length=200, null=False, verbose_name='Подпись')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
-    author = models.CharField(max_length=100, verbose_name="Автор")
+    author = models.ForeignKey(get_user_model(), on_delete = models.CASCADE, verbose_name="Автор")
 
 
     def __str__(self):
