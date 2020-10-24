@@ -5,8 +5,10 @@
     {% for photo in photos %}
         <form method="post" enctype="multipart/form-data">
             <div class="box">
-                <img class="photo" src="{{ photo.photo }}" width="550" height="550" alt="photo">
+                <img class="photo" src="{{ photo.photo.url }}" width="550" height="auto" alt="photo">
                 <h3><a href="{% url "webapp:photo_view" photo.pk %}">{{ photo.sign }}</a></h3>
+                <p>Добавил пользователь: <a href="{% url 'accounts:detail' photo.author.pk %}"> {{ photo.author }} </a></p>
+                <p>Добавлено: {{ photo.created_at|date:"d.m.Y H:i:s" }}</p></p>
                 {% if perms.webapp.update_photo or photo.user == request.user %}
                     <p><a href="{% url 'webapp:photo_update' photo.pk %}">Update</a></p>
                 {% endif %}

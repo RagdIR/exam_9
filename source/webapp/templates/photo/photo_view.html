@@ -14,10 +14,10 @@
 {% block content %}
     <form method="post" enctype="multipart/form-data">
         <div class="box">
-            <img class="photo" src="{{ photo.photo }}" width="550" height="550" alt="photo">
+            <img class="photo" src="{{ photo.photo.url }}" width="550" height="auto" alt="photo">
             <h1>{{ photo.sign }}</h1>
-            <p>Автор: {{ photo.author }}</p>
-            <p>Добавлено: {{ photo.created_at }}</p>
+            <p>Автор: <a href="{% url 'accounts:detail' photo.author.pk %}"> {{ photo.author }} </a></p>
+            <p>Добавлено: {{ photo.created_at|date:"d.m.Y H:i:s" }} </p>
         </div>
     </form>
 {% endblock %}

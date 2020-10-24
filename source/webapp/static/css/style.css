@@ -149,7 +149,7 @@ table {
 }
 
 .box {
-    box-sizing: border-box;
+    box-sizing: inherit;
     border: solid 1px gray;
     border-radius: 10px;
     margin: 10px;
@@ -214,4 +214,8 @@ input[type='submit']:hover {
     background: rgba(0, 0, 0, 0.15);
     border-color: #444444;
     color: #444444;
+}
+
+.photo {
+    border-radius: 20px 10px 5px 0;
 }
