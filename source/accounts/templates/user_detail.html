@@ -10,15 +10,17 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>
-    {% if user_obj.profile.avatar %}
-        <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
-    {% endif %}
-    <p>Имя пользователя: {{ user_obj.username }}</p>
-    <p>Имя: {{ user_obj.first_name }}</p>
-    <p>Фамилия: {{ user_obj.last_name }}</p>
-    <p>Почта: {{ user_obj.email }}</p>
+    <div class="box">
+        <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>
+        {% if user_obj.profile.avatar %}
+            <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="auto" alt="user picture">
+        {% endif %}
+        <p>Имя пользователя: {{ user_obj.username }}</p>
+        <p>Имя: {{ user_obj.first_name }}</p>
+        <p>Фамилия: {{ user_obj.last_name }}</p>
+        <p>Почта: {{ user_obj.email }}</p>
+    </div>
 
-{#    <h2 class="text-center clear">Статьи автора:</h2>#}
-{#    {% include 'partial/article_list.html' %}#}
+    <h2 class="text-center clear">Добавил картинки:</h2>
+    {% include 'partial/photo_list.html' %}
 {% endblock %}
