@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Фотографии</h1>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+    {% for photo in photos %}
+        <div class="box">
+            <h3><a href="{% url "webapp:photo_view" photo.pk %}">{{ photo.sign }}</a></h3>
+{#            <p><a href="{% url 'webapp:photo_update' photo.pk %}">Update</a></p>#}
+{#            <p><a href="{% url 'webapp:photo_delete' photo.pk %}">Delete</a></p>#}
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}
